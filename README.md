@@ -1,37 +1,41 @@
 ## GSMSim Library for Arduino (for SimCom Modules like SIM800L, SIM900 etc)
 
-You can use the [editor on GitHub](https://github.com/erdemarslan/GSMSim/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This library for Arduino to use SimCom GSM Modules. This library tested on Sim800L (5V Module). Some functions may not work other SimCom Modules like FM Radio functions. This library may work other gsm shields or modules. But some AT Commands only work SimCom modules. So some functions may not work on other gsm shield or module (etc A6 Ai-Thinker)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### How I use this library?
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Firsly inport this library on your Arduino IDE. Then you can use this:
 
 ```markdown
-Syntax highlighted code block
+#import <GSMSim.h>
 
-# Header 1
-## Header 2
-### Header 3
+#define RX 7
+#define TX 8
+#define RESET 2
+#define BAUD 9600
 
-- Bulleted
-- List
+/*
+ * Defaults => RX: 7 | TX: 8 | Reset: 2 | LED Pin: 13 | LED Flag: true | Baud Rate: 9600
+ * GSMSim gsm;
+ * GSMSim gsm(RX, TX);
+ * GSMSim gsm(RX, TX, RESET);
+ * GSMSim gsm(RX, TX, RESET, LED_PIN, LED_FLAG);
+ */
 
-1. Numbered
-2. List
+GSMSim gsm(RX, TX, RESET);
 
-**Bold** and _Italic_ and `Code` text
+void setup() {
+  gsm.start();
+  //gsm.start(9600);
+}
 
-[Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+For more details see Examples.
 
-### Jekyll Themes
+### Which functions i can use?
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/erdemarslan/GSMSim/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
 ### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+If you have any question about this library, please contact only on GitHub.
