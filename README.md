@@ -78,13 +78,16 @@ callStatus()|integer|Return codes as same as phoneStatus function
 callSetCOLP(bool active)|true or false|If active is true, when call status change, module send call details to SoftwareSerial
 callIsCOLPActive|true or false|True COLP is active else passive
 callActivateListCurrent(bool active)|true or false|say the caller :)
-callReadCurrentCall(String serialRaw)|String|Return call status and number like STATUS:xxx|NUMBER:xxx - This only read when you give raw serial data to this function. It not fetch the raw serial data!
+callReadCurrentCall(String serialRaw)|String|Return call status and number like STATUS:xxx\|NUMBER:xxx - This only read when you give raw serial data to this function. It not fetch the raw serial data!
 
 
 #### SMS functions
 Name|Return|Notes
 :-------|:-------:|:-----------------------------------------------:|
-
+smsTextMode(bool textModeON)|true or false|TEXT mode or PDU mode.
+smsSend(char* number, char* message)|true or false|
+smsListUnread()|String|If no message found it returns NO_SMS else returns SMSIndexNo:x,y,z. If you have a lot of un read messages, return only SMSIndexNo:
+smsRead(uint8_t index)|String|If not message on given index, it return INDEX_NO_ERROR else a string about message.
 
 
 
