@@ -37,6 +37,8 @@ For more details see Examples.
 
 ### Which functions i can use?
 
+#### Module Functions
+
 Name|Return|Notes
 :-------|:-------:|:-----------------------------------------------:|
 start()|none|Begin the library with 9600 baud rate
@@ -56,7 +58,7 @@ moduleManufacturer()|String|
 moduleModel()|String|
 moduleRevision()|String|
 moduleIMEI()|String|
-moduleChangeIMEI(String)|true or false|Reserved for future
+moduleChangeIMEI(char* new_imei)|true or false|Reserved for future
 moduleIMSI()|String|
 moduleICCID()|String|
 ringerVolume()|integer|
@@ -64,8 +66,27 @@ setRingerVolume(uint8_t level)|true or false|level must between 0-100
 speakerVolume()|integer|
 setSpeakerVolume(uint8_t level)|true or false|level must between 0-100
 moduleDebug()|String|print verbose
+
+
+#### Call functions
+Name|Return|Notes
+:-------|:-------:|:-----------------------------------------------:|
 call(char* phone_number)|true or false|If colp active, it always return true.
 callAnswer()|true or false|
+callHangoff()|true of false|
+callStatus()|integer|Return codes as same as phoneStatus function
+callSetCOLP(bool active)|true or false|If active is true, when call status change, module send call details to SoftwareSerial
+callIsCOLPActive|true or false|True COLP is active else passive
+callActivateListCurrent(bool active)|true or false|say the caller :)
+callReadCurrentCall(String serialRaw)|String|Return call status and number like STATUS:xxx|NUMBER:xxx - This only read when you give raw serial data to this function. It not fetch the raw serial data!
+
+
+#### SMS functions
+Name|Return|Notes
+:-------|:-------:|:-----------------------------------------------:|
+
+
+
 
 
 
