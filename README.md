@@ -4,6 +4,15 @@ This library for Arduino to use SimCom GSM Modules. This library tested on Sim80
 
 This library use SoftwareSerial library. So please dont forget this library's limits. Dont use this library on Arduino's hardware serial ports 0 and 1!
 
+### Connection & Pinouts
+Arduino Uno  |   Sim800L   |    Notes  
+-------------|-------------|------------
++5v| (3.8v)~(4.4v)!| Power supply input
+7 RX_PIN | TX |  
+8 TX_PIN | RX |
+2   RESET_PIN | RST| Reset Pin
+GND | GND |
+
 ### How I use this library?
 
 Firstly inport this library on your Arduino IDE. Then you can use this:
@@ -158,6 +167,11 @@ emailSMTPWrite(String from, String to, String title, String message, String from
 emailSMTPSend()|String|Return SUCCESS:EMAIL_SEND if send status ok. Else return ERROR:Error_Type
 
 
+### Credits
+
+Cristian Steib - Sim800l Arduino library - https://github.com/cristiansteib/Sim800l
+Vittorio Esposito - Sim800L-Arduino-Library-revised - https://github.com/VittorioEsposito/Sim800L-Arduino-Library-revised
+Thanks.
 
 
 ### Support or Contact
