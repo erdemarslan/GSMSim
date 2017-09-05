@@ -170,7 +170,9 @@ emailSMTPSend()|String|Return SUCCESS:EMAIL_SEND if send status ok. Else return 
 ### Credits
 
 Cristian Steib - Sim800l Arduino library - https://github.com/cristiansteib/Sim800l
+
 Vittorio Esposito - Sim800L-Arduino-Library-revised - https://github.com/VittorioEsposito/Sim800L-Arduino-Library-revised
+
 Thanks.
 
 
