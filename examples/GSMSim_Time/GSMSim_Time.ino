@@ -29,25 +29,25 @@ void setup() {
   // Get module date time
   Serial.print("Module DateTime: ");
   Serial.println(gsm.timeGetRaw());
-  
+
   Serial.print("Connect to Internet: ");
   // For setting time from ntp servers, we must connect to internet!
   Serial.println(gsm.gprsConnectBearer());
 
   Serial.print("Set timezone to +3: ");
   Serial.println(gsm.timeSetServer(3)); // time server is: 202.120.2.101 (Shanghai Jiaotong University - China)
-  //Serial.println(gsm.timeSetServer("202.120.2.101", 3)); // you can set server too :)
+  //Serial.println(gsm.timeSetServer(3, "202.120.2.101")); // you can set server too :)
 
   Serial.print("Sync from server. Server response: ");
   Serial.println(gsm.timeSyncFromServer());
 
   Serial.print("Module DateTime after sync: ");
   Serial.println(gsm.timeGetRaw());
-  
+
   // Close internet connection
   Serial.print("Close Internet: ");
   Serial.println(gsm.gprsCloseConn());
-  
+
 }
 
 void loop() {
