@@ -67,7 +67,6 @@ moduleManufacturer()|String|
 moduleModel()|String|
 moduleRevision()|String|
 moduleIMEI()|String|
-moduleChangeIMEI(char* new_imei)|true or false|Reserved for future
 moduleIMSI()|String|
 moduleICCID()|String|
 ringerVolume()|integer|
