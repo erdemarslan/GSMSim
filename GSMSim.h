@@ -132,11 +132,11 @@ class GSMSim : public SoftwareSerial
 		bool setSpeakerVolume(uint8_t level);
 		// debug modu - verbose mode
 		String moduleDebug();
-		
 
 
 
-		
+
+
 		// Arama Fonksiyonları
 		// arama yapar
 		bool call(char* phone_number);
@@ -226,7 +226,7 @@ class GSMSim : public SoftwareSerial
 
 		// NTP Komutları
 		bool timeSetServer(int timezone);
-		bool timeSetServer(String server, int timezone);
+		bool timeSetServer(int timezone, String server);
 		String timeSyncFromServer();
 		String timeGetRaw();
 		void timeGet(int *day, int *month, int *year, int *hour, int *minute, int *second);

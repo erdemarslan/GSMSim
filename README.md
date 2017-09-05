@@ -85,10 +85,77 @@ callReadCurrentCall(String serialRaw)|String|Return call status and number like 
 Name|Return|Notes
 :-------|:-------:|:-----------------------------------------------:|
 smsTextMode(bool textModeON)|true or false|TEXT mode or PDU mode.
-smsSend(char* number, char* message)|true or false|
+smsSend(char* number, char* message)|true or false|Message must be in 160 characters and in text mode only use ascii characters.
 smsListUnread()|String|If no message found it returns NO_SMS else returns SMSIndexNo:x,y,z. If you have a lot of un read messages, return only SMSIndexNo:
 smsRead(uint8_t index)|String|If not message on given index, it return INDEX_NO_ERROR else a string about message.
+smsRead(uint8_t index, bool markRead)|String|This function can mark message read or unread when opened.
+smsReadFromSerial(String serialRaw)|String|Read sms from serial raw data.
+smsIndexFromSerial(String serialRaw)|integer|Get sms index number from serial raw.
+smsReadMessageCenter()|String|Get SMS Message Center number.
+smsChangeMessageCenter(char* messageCenter)|true or false|Change SMS Message Center number.
+smsDeleteOne(uint8_t index)|true or false|Delete sms in given index.
+smsDeleteAllRead()|true or false|Delete all read messages.
+smsDeleteAll()|true or false|Delete all messages.
 
+#### DTMF functions
+Name|Return|Notes
+:-------|:-------:|:-----------------------------------------------:|
+dtmfSet(bool active, uint8_t interval, bool reportTime, bool soundDetect)|true or false|Activate or deactivate DTMF tones.
+dtmfRead(String serialRaw)|String|Get pressed key info from DTMF on serial raw data.
+
+
+#### USSD functions
+Name|Return|Notes
+:-------|:-------:|:-----------------------------------------------:|
+ussdSend(char* code)|true or false|Send USSD command.
+ussdRead(String serialRaw)|String|
+
+#### FM Radio functions
+Name|Return|Notes
+:-------|:-------:|:-----------------------------------------------:|
+fmOpen()|true or false|Open fm radio.
+fmOpen(bool mainChannel)|true or false|Open fm radio. true is main channel, false is aux channel.
+fmOpen(bool mainChannel, uint8_t freq)|true or false|Frequency must be between 875 and 1080. 875 is 87.5 MHz.
+fmIsOpened()|true or false|Return radio status.
+fmClose()|true or false|
+fmGetFreq()|integer|
+fmSetFreq(uint8_t freq)|true or false|875 to 1080
+fmGetVolume()|integer|
+fmSetVolume(uint8_t volume)|true or false|
+
+#### GPRS functions
+Name|Return|Notes
+:-------|:-------:|:-----------------------------------------------:|
+gprsConnectBearer()|true or false|APN=internet, USER="", PASS=""
+gprsConnectBearer(String apn)|true or false|
+gprsConnectBearer(String apn, String user, String password)|true or false|
+gprsIsConnected()|true or false|Return gprs connection status.
+gprsGetIP()|String|Return IP Address
+gprsCloseConn()|true or false|
+gprsHTTPGet(String url)|String|Only get about response info, http code etc.
+gprsHTTPGet(String url, bool read)|String|Get with response.
+
+
+#### Time functions
+Name|Return|Notes
+:-------|:-------:|:-----------------------------------------------:|
+timeSetServer(int timezone)|true or false|Require active internet connection
+timeSetServer(int timezone, String server)|true or false|
+timeSyncFromServer()|true or false|Sync time from server. Require an active internet connection.
+timeGetRaw()|String|Get raw time.
+timeGet(int *day, int *month, int *year, int *hour, int *minute, int *second)|void|
+
+
+#### Time functions
+Name|Return|Notes
+:-------|:-------:|:-----------------------------------------------:|
+emailSMTPConf(String server, String port, bool useSSL)|true or false|Set SMTP Server configuration.
+emailSMTPAuth(String username, String password)|true or false|
+emailSMTPAuth(String username, String password, bool requireAuth)|true or false|
+emailSMTPGmail(String username, String password)|true or false|If you want to send email over GMAIL, you can use this function for set server requirements.
+emailSMTPWrite(String from, String to, String title, String message)|String|Return OK if success.
+emailSMTPWrite(String from, String to, String title, String message, String fromName, String toName)|String|Return OK if success.
+emailSMTPSend()|String|Return SUCCESS:EMAIL_SEND if send status ok. Else return ERROR:Error_Type
 
 
 

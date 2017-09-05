@@ -81,7 +81,7 @@ void GSMSim::start() {
 	if (LED_FLAG) {
 		pinMode(LED_PIN, OUTPUT);
 	}
-	
+
 	_buffer.reserve(BUFFER_RESERVE_MEMORY);
 }
 void GSMSim::start(uint32_t baud) {
@@ -254,7 +254,7 @@ String GSMSim::operatorNameFromSim() {
 	else {
 		return "NOT CONNECTED";
 	}
-	
+
 }
 
 // PHONE STATUS
@@ -276,7 +276,7 @@ bool GSMSim::echoOff() {
 	this->print(F("ATE0\r"));
 	_buffer = _readSerial();
 	if ( (_buffer.indexOf("OK") )!=-1 ) {
-   		return true; 
+   		return true;
    }
    else {
    	return false;
@@ -288,7 +288,7 @@ bool GSMSim::echoOn() {
 	this->print(F("ATE1\r"));
 	_buffer = _readSerial();
 	if ( (_buffer.indexOf("OK") )!=-1 ) {
-   		return true; 
+   		return true;
    }
    else {
    	return false;
@@ -424,7 +424,7 @@ bool GSMSim::setSpeakerVolume(uint8_t level) {
 
 String GSMSim::moduleDebug() {
 	this->print(F("AT&V\r"));
-	
+
 	return _readSerial();
 }
 
@@ -557,7 +557,7 @@ String GSMSim::callReadCurrentCall(String serialRaw) {
 	if (serialRaw.indexOf("+CLCC:") != -1) {
 		String durum = serialRaw.substring(11,13);
 		String numara = serialRaw.substring(18, serialRaw.indexOf("\","));
-		
+
 		if (durum == "0") {
 			durum = "STATUS:ACTIVE"; // Görüşme var
 		}
@@ -616,7 +616,7 @@ bool GSMSim::smsSend(char* number, char* message) {
 	_buffer = _readSerial();
 	this->print(message);
 	this->print("\r");
-	//change delay 100 to readserial	
+	//change delay 100 to readserial
 	_buffer += _readSerial();
 	this->print((char)26);
 
@@ -645,7 +645,7 @@ String GSMSim::smsListUnread() {
 	if (_buffer.indexOf("ERROR") != -1) {
 		donus = "ERROR";
 	}
-	
+
 
 	if (_buffer.indexOf("+CMGL:") != -1) {
 
@@ -671,7 +671,7 @@ String GSMSim::smsListUnread() {
 				donus += ",";
 				donus += metin;
 			}
-			
+
 		}
 
 	}
@@ -788,11 +788,11 @@ String GSMSim::smsRead(uint8_t index, bool markRead) {
 		telno = telno_bol1.substring(0, telno_bol1.indexOf("\",\"")); // telefon numarası tamam
 
 		String tarih_bol = telno_bol1.substring(telno_bol1.lastIndexOf("\",\"") + 3);
-		
+
 		zaman = tarih_bol.substring(0, tarih_bol.indexOf("\"")); // zamanı da aldık. Bir tek mesaj kaldı!
 
 		mesaj = tarih_bol.substring(tarih_bol.indexOf("\"")+1, tarih_bol.lastIndexOf("OK"));
-		
+
 		mesaj.trim();
 
 		durum = "FOLDER:";
@@ -881,7 +881,7 @@ bool GSMSim::smsDeleteOne(uint8_t index) {
 	else {
 		return false;
 	}
-	
+
 }
 
 // Tüm okunmuş mesajlaarı siler. Fakat gidene dokunmaz
@@ -889,7 +889,7 @@ bool GSMSim::smsDeleteAllRead() {
 	this->print(F("AT+CMGD=1,1\r"));
 
 	_buffer = _readSerial();
-	
+
 	if (_buffer.indexOf("OK") != -1) {
 		return true;
 	}
@@ -1600,7 +1600,7 @@ bool GSMSim::timeSetServer(int timezone) {
 		return false;
 	}
 }
-bool GSMSim::timeSetServer(String server, int timezone) {
+bool GSMSim::timeSetServer(int timezone, String server) {
 	this->print("AT+CNTPCID=1\r");
 	_buffer = _readSerial();
 
@@ -1631,13 +1631,13 @@ bool GSMSim::timeSetServer(String server, int timezone) {
 	}
 }
 String GSMSim::timeSyncFromServer() {
-	
+
 	this->print(F("AT+CNTP\r"));
 	_buffer = _readSerial();
 	//delay(50);
 	_buffer = _readSerial(20000);
 
-	
+
 	if (_buffer.indexOf("+CNTP:") != -1) {
 		String kod = _buffer.substring(8);
 		kod.trim();
@@ -1790,7 +1790,7 @@ bool GSMSim::emailSMTPGmail(String username, String password) {
 	}
 }
 String GSMSim::emailSMTPWrite(String from, String to, String title, String message) {
-	
+
 	this->print(F("AT+SMTPFROM=\""));
 	this->print(from);
 	this->print("\"\r");
@@ -1805,9 +1805,9 @@ String GSMSim::emailSMTPWrite(String from, String to, String title, String messa
 		this->print(to);
 		this->print("\"\r");
 		_buffer = _readSerial();
-		
+
 		if (_buffer.indexOf("OK") != -1) {
-			
+
 			this->print(F("AT+SMTPSUB=\""));
 			this->print(title);
 			this->print("\"\r");
@@ -1827,24 +1827,24 @@ String GSMSim::emailSMTPWrite(String from, String to, String title, String messa
 				_buffer += _readSerial();
 
 				if (_buffer.indexOf("OK") != -1) {
-					
+
 					return "OK";
 				}
 				else {
-					return _buffer;
+					return "ERROR:BODY_NOT_SET";
 				}
 
 			}
 			else {
-				return _buffer;
+				return "ERROR:TITLE_NOT_SET";
 			}
 		}
 		else {
-			return _buffer;
+			return "ERROR:TO_NOT_SET";
 		}
 	}
 	else {
-		return _buffer;
+		return "ERROR:FROM_NOT_SET";
 	}
 }
 String GSMSim::emailSMTPWrite(String from, String to, String title, String message, String fromName, String toName) {
@@ -1892,20 +1892,20 @@ String GSMSim::emailSMTPWrite(String from, String to, String title, String messa
 					return "OK";
 				}
 				else {
-					return _buffer;
+					return "ERROR:BODY_NOT_SET";
 				}
 
 			}
 			else {
-				return _buffer;
+				return "ERROR:TITLE_NOT_SET";
 			}
 		}
 		else {
-			return _buffer;
+			return "ERROR:TO_NOT_SET";
 		}
 	}
 	else {
-		return _buffer;
+		return "ERROR:FROM_NOT_SET";
 	}
 }
 
@@ -1992,7 +1992,7 @@ String GSMSim::emailSMTPSend() {
 				}
 			}
 			else {
-				return "ERROR:EMAIL_UNKNOWN_ERROR";
+				return "ERROR:EMAIL_TIMEOUT_ERROR";
 			}
 		}
 	}
