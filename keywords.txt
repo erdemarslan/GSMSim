@@ -13,6 +13,7 @@ GSMSim	KEYWORD1
 #######################################
 start					KEYWORD2
 reset					KEYWORD2
+readSerial    KEYWORD2
 setPhoneFunc			KEYWORD2
 signalQuality			KEYWORD2
 isRegistered			KEYWORD2
@@ -54,6 +55,7 @@ smsChangeMessageCenter	KEYWORD2
 smsDeleteOne			KEYWORD2
 smsDeleteAllRead		KEYWORD2
 smsDeleteAll			KEYWORD2
+smsChangeIncomingIndicator KEYWORD2
 dtmfSet					KEYWORD2
 dtmfRead				KEYWORD2
 ussdSend				KEYWORD2
@@ -79,6 +81,7 @@ timeGet					KEYWORD2
 #######################################
 start					KEYWORD2
 reset					KEYWORD2
+readSerial    KEYWORD2
 setPhoneFunc			KEYWORD2
 signalQuality			KEYWORD2
 isRegistered			KEYWORD2
@@ -126,6 +129,7 @@ smsChangeMessageCenter	KEYWORD2
 smsDeleteOne			KEYWORD2
 smsDeleteAllRead		KEYWORD2
 smsDeleteAll			KEYWORD2
+smsChangeIncomingIndicator KEYWORD2
 
 # Methods for DTMF  (KEYWORD2)
 #######################################
