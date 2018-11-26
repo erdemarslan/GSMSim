@@ -181,6 +181,8 @@ class GSMSim : public SoftwareSerial
 		bool smsDeleteAllRead();
 		// tüm mesajları sil
 		bool smsDeleteAll();
+		// Gelen Mesaj İndicatörünü değiştir
+		bool smsChangeIncomingIndicator(bool save);
 
 
 		// DTMF Fonksiyonları
