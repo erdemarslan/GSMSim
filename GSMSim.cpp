@@ -99,6 +99,16 @@ void GSMSim::start(uint32_t baud) {
 	_buffer.reserve(BUFFER_RESERVE_MEMORY);
 }
 
+String GSMSim::readSerial() {
+	return _readSerial();
+}
+
+String GSMSim::readSerial(uint32_t timeout) {
+	return _readSerial(timeout);
+}
+
+
+
 // Reset GMS Module
 void GSMSim::reset() {
 	if (LED_FLAG) {
