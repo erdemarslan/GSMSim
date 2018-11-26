@@ -912,6 +912,24 @@ bool GSMSim::smsDeleteAll() {
 	}
 }
 
+// Gelen Mesaj Indicatorünü değiştir
+bool GSMSim::smsChangeIncomingIndicator(bool save) {
+	if (save) {
+		this->print(F("AT+CNMI=1,1,0,0,0\r"));
+	} else {
+		this->print(F("AT+CNMI=2,2,0,0,0\r"));
+	}
+	
+	_buffer = _readSerial();
+
+	if (_buffer.indexOf("OK") != -1) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 
 //////////////////////////////////////
 //			DTMF BÖLÜMÜ				//
