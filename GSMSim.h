@@ -85,6 +85,9 @@ class GSMSim : public SoftwareSerial
 		void start(uint32_t baud);
 		// Reset Fonksiyonu
 		void reset();
+		
+		String readSerial();
+		String readSerial(uint32_t timeout);
 
 		// Kontrol Metotları
 
