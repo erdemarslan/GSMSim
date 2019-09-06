@@ -11,165 +11,165 @@ GSMSim	KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-start					KEYWORD2
-reset					KEYWORD2
-readSerial    KEYWORD2
-setPhoneFunc			KEYWORD2
-signalQuality			KEYWORD2
-isRegistered			KEYWORD2
-isSimInserted			KEYWORD2
-pinStatus				KEYWORD2
-operatorName			KEYWORD2
-operatorNameFromSim		KEYWORD2
-phoneStatus				KEYWORD2
-echoOff					KEYWORD2
-echoOn					KEYWORD2
-moduleManufacturer		KEYWORD2
-moduleModel				KEYWORD2
-moduleRevision			KEYWORD2
-moduleIMEI				KEYWORD2
-moduleIMEIChange		KEYWORD2
-moduleIMSI				KEYWORD2
-moduleICCID				KEYWORD2
-ringerVolume			KEYWORD2
-setRingerVolume			KEYWORD2
-speakerVolume			KEYWORD2
-setSpeakerVolume		KEYWORD2
-moduleDebug				KEYWORD2
-call					KEYWORD2
-callAnswer				KEYWORD2
-callHangoff				KEYWORD2
-callStatus				KEYWORD2
-callSetCOLP				KEYWORD2
-callIsCOLPActive		KEYWORD2
+start	KEYWORD2
+reset	KEYWORD2
+readSerial	KEYWORD2
+setPhoneFunc	KEYWORD2
+signalQuality	KEYWORD2
+isRegistered	KEYWORD2
+isSimInserted	KEYWORD2
+pinStatus	KEYWORD2
+operatorName	KEYWORD2
+operatorNameFromSim	KEYWORD2
+phoneStatus	KEYWORD2
+echoOff	KEYWORD2
+echoOn	KEYWORD2
+moduleManufacturer	KEYWORD2
+moduleModel	KEYWORD2
+moduleRevision	KEYWORD2
+moduleIMEI	KEYWORD2
+moduleIMEIChange	KEYWORD2
+moduleIMSI	KEYWORD2
+moduleICCID	KEYWORD2
+ringerVolume	KEYWORD2
+setRingerVolume	KEYWORD2
+speakerVolume	KEYWORD2
+setSpeakerVolume	KEYWORD2
+moduleDebug	KEYWORD2
+call	KEYWORD2
+callAnswer	KEYWORD2
+callHangoff	KEYWORD2
+callStatus	KEYWORD2
+callSetCOLP	KEYWORD2
+callIsCOLPActive	KEYWORD2
 callActivateListCurrent	KEYWORD2
-callReadCurrentCall		KEYWORD2
-smsTextMode				KEYWORD2
-smsSend					KEYWORD2
-smsListUnread			KEYWORD2
-smsRead					KEYWORD2
-smsReadFromSerial		KEYWORD2
-smsIndexFromSerial		KEYWORD2
+callReadCurrentCall	KEYWORD2
+smsTextMode	KEYWORD2
+smsSend	KEYWORD2
+smsListUnread	KEYWORD2
+smsRead	KEYWORD2
+smsReadFromSerial	KEYWORD2
+smsIndexFromSerial	KEYWORD2
 smsReadMessageCenter	KEYWORD2
 smsChangeMessageCenter	KEYWORD2
-smsDeleteOne			KEYWORD2
-smsDeleteAllRead		KEYWORD2
-smsDeleteAll			KEYWORD2
-smsChangeIncomingIndicator KEYWORD2
-dtmfSet					KEYWORD2
-dtmfRead				KEYWORD2
-ussdSend				KEYWORD2
-ussdRead				KEYWORD2
-fmOpen					KEYWORD2
-fmIsOpened				KEYWORD2
-fmClose					KEYWORD2
-fmGetFreq				KEYWORD2
-fmSetFreq				KEYWORD2
-fmGetVolume				KEYWORD2
-fmSetVolume				KEYWORD2
-gprsConnectBearer		KEYWORD2
-gprsIsConnected			KEYWORD2
-gprsGetIP				KEYWORD2
-gprsCloseConn			KEYWORD2
-gprsHTTPGet				KEYWORD2
-timeSetServer			KEYWORD2
-timeSyncFromServer		KEYWORD2
-timeGet					KEYWORD2
+smsDeleteOne	KEYWORD2
+smsDeleteAllRead	KEYWORD2
+smsDeleteAll	KEYWORD2
+smsChangeIncomingIndicator	KEYWORD2
+dtmfSet	KEYWORD2
+dtmfRead	KEYWORD2
+ussdSend	KEYWORD2
+ussdRead	KEYWORD2
+fmOpen	KEYWORD2
+fmIsOpened	KEYWORD2
+fmClose	KEYWORD2
+fmGetFreq	KEYWORD2
+fmSetFreq	KEYWORD2
+fmGetVolume	KEYWORD2
+fmSetVolume	KEYWORD2
+gprsConnectBearer	KEYWORD2
+gprsIsConnected	KEYWORD2
+gprsGetIP	KEYWORD2
+gprsCloseConn	KEYWORD2
+gprsHTTPGet	KEYWORD2
+timeSetServer	KEYWORD2
+timeSyncFromServer	KEYWORD2
+timeGet	KEYWORD2
 
 
 # Methods for Module (KEYWORD2)
 #######################################
-start					KEYWORD2
-reset					KEYWORD2
-readSerial    KEYWORD2
-setPhoneFunc			KEYWORD2
-signalQuality			KEYWORD2
-isRegistered			KEYWORD2
-isSimInserted			KEYWORD2
-pinStatus				KEYWORD2
-operatorName			KEYWORD2
-operatorNameFromSim		KEYWORD2
-phoneStatus				KEYWORD2
-echoOff					KEYWORD2
-echoOn					KEYWORD2
-moduleManufacturer		KEYWORD2
-moduleModel				KEYWORD2
-moduleRevision			KEYWORD2
-moduleIMEI				KEYWORD2
-moduleIMEIChange		KEYWORD2
-moduleIMSI				KEYWORD2
-moduleICCID				KEYWORD2
-ringerVolume			KEYWORD2
-setRingerVolume			KEYWORD2
-speakerVolume			KEYWORD2
-setSpeakerVolume		KEYWORD2
-moduleDebug				KEYWORD2
+start	KEYWORD2
+reset	KEYWORD2
+readSerial	KEYWORD2
+setPhoneFunc	KEYWORD2
+signalQuality	KEYWORD2
+isRegistered	KEYWORD2
+isSimInserted	KEYWORD2
+pinStatus	KEYWORD2
+operatorName	KEYWORD2
+operatorNameFromSim	KEYWORD2
+phoneStatus	KEYWORD2
+echoOff	KEYWORD2
+echoOn	KEYWORD2
+moduleManufacturer	KEYWORD2
+moduleModel	KEYWORD2
+moduleRevision	KEYWORD2
+moduleIMEI	KEYWORD2
+moduleIMEIChange	KEYWORD2
+moduleIMSI	KEYWORD2
+moduleICCID	KEYWORD2
+ringerVolume	KEYWORD2
+setRingerVolume	KEYWORD2
+speakerVolume	KEYWORD2
+setSpeakerVolume	KEYWORD2
+moduleDebug	KEYWORD2
 
 # Methods for Call (KEYWORD2)
 #######################################
-call					KEYWORD2
-callAnswer				KEYWORD2
-callHangoff				KEYWORD2
-callStatus				KEYWORD2
-callSetCOLP				KEYWORD2
-callIsCOLPActive		KEYWORD2
+call	KEYWORD2
+callAnswer	KEYWORD2
+callHangoff	KEYWORD2
+callStatus	KEYWORD2
+callSetCOLP	KEYWORD2
+callIsCOLPActive	KEYWORD2
 callActivateListCurrent	KEYWORD2
-callReadCurrentCall		KEYWORD2
+callReadCurrentCall	KEYWORD2
 
 # Methods for SMS  (KEYWORD2)
 #######################################
-smsTextMode				KEYWORD2
-smsSend					KEYWORD2
-smsListUnread			KEYWORD2
-smsRead					KEYWORD2
-smsReadFromSerial		KEYWORD2
-smsIndexFromSerial		KEYWORD2
+smsTextMode	KEYWORD2
+smsSend	KEYWORD2
+smsListUnread	KEYWORD2
+smsRead	KEYWORD2
+smsReadFromSerial	KEYWORD2
+smsIndexFromSerial	KEYWORD2
 smsReadMessageCenter	KEYWORD2
 smsChangeMessageCenter	KEYWORD2
-smsDeleteOne			KEYWORD2
-smsDeleteAllRead		KEYWORD2
-smsDeleteAll			KEYWORD2
-smsChangeIncomingIndicator KEYWORD2
+smsDeleteOne	KEYWORD2
+smsDeleteAllRead	KEYWORD2
+smsDeleteAll	KEYWORD2
+smsChangeIncomingIndicator	KEYWORD2
 
 # Methods for DTMF  (KEYWORD2)
 #######################################
-dtmfSet					KEYWORD2
-dtmfRead				KEYWORD2
+dtmfSet	KEYWORD2
+dtmfRead	KEYWORD2
 
 # Methods for USSD  (KEYWORD2)
 #######################################
-ussdSend				KEYWORD2
-ussdRead				KEYWORD2
+ussdSend	KEYWORD2
+ussdRead	KEYWORD2
 
 # Methods for FM RADIO  (KEYWORD2)
 #######################################
-fmOpen					KEYWORD2
-fmIsOpened				KEYWORD2
-fmClose					KEYWORD2
-fmGetFreq				KEYWORD2
-fmSetFreq				KEYWORD2
-fmGetVolume				KEYWORD2
-fmSetVolume				KEYWORD2
+fmOpen	KEYWORD2
+fmIsOpened	KEYWORD2
+fmClose	KEYWORD2
+fmGetFreq	KEYWORD2
+fmSetFreq	KEYWORD2
+fmGetVolume	KEYWORD2
+fmSetVolume	KEYWORD2
 
 # Methods for GPRS	  (KEYWORD2)
 #######################################
-gprsConnectBearer		KEYWORD2
-gprsIsConnected			KEYWORD2
-gprsGetIP				KEYWORD2
-gprsCloseConn			KEYWORD2
-gprsHTTPGet				KEYWORD2
+gprsConnectBearer	KEYWORD2
+gprsIsConnected	KEYWORD2
+gprsGetIP	KEYWORD2
+gprsCloseConn	KEYWORD2
+gprsHTTPGet	KEYWORD2
 
 # Methods for TIME	   (KEYWORD2)
 #######################################
-timeSetServer			KEYWORD2
-timeSyncFromServer		KEYWORD2
-timeGet					KEYWORD2
-timeGetRaw					KEYWORD2
+timeSetServer	KEYWORD2
+timeSyncFromServer	KEYWORD2
+timeGet	KEYWORD2
+timeGetRaw	KEYWORD2
 
 # Methods for EMAIL	   (KEYWORD2)
 #######################################
-emailSMTPConf			KEYWORD2
-emailSMTPAuth			KEYWORD2
-emailSMTPGmail			KEYWORD2
-emailSMTPWrite			KEYWORD2
-emailSMTPSend			KEYWORD2
+emailSMTPConf	KEYWORD2
+emailSMTPAuth	KEYWORD2
+emailSMTPGmail	KEYWORD2
+emailSMTPWrite	KEYWORD2
+emailSMTPSend	KEYWORD2
