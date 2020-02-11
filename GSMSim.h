@@ -204,11 +204,11 @@ class GSMSim : public SoftwareSerial
 		// Radyo Kodları
 		bool fmOpen();
 		bool fmOpen(bool mainChannel);
-		bool fmOpen(bool mainChannel, uint8_t freq);
+		bool fmOpen(bool mainChannel, uint16_t freq);
 		bool fmIsOpened();
 		bool fmClose();
-		uint8_t fmGetFreq();
-		bool fmSetFreq(uint8_t freq);
+		uint16_t fmGetFreq();
+		bool fmSetFreq(uint16_t freq);
 		uint8_t fmGetVolume();
 		bool fmSetVolume(uint8_t volume);
 
