@@ -1055,21 +1055,21 @@ bool GSMSim::fmOpen(bool mainChannel) {
 		return false;
 	}
 }
-bool GSMSim::fmOpen(bool mainChannel, uint8_t freq) {
+bool GSMSim::fmOpen(bool mainChannel, uint16_t freq) {
 	uint8_t channel = mainChannel == true ? 1 : 0;
-	uint8_t frekans = 875;
+	
 	if (freq < 875) {
-		frekans = 875;
+		freq = 875;
 	}
 	if (freq > 1080) {
-		frekans = 1080;
+		freq = 1080;
 	}
 
 
 	this->print(F("AT+FMOPEN="));
 	this->print(channel);
 	this->print(",");
-	this->print(frekans);
+	this->print(freq);
 	this->print(F("\r"));
 
 	_buffer = _readSerial();
@@ -1109,7 +1109,7 @@ bool GSMSim::fmClose() {
 }
 
 // GET FM RADIO FREQ
-uint8_t GSMSim::fmGetFreq() {
+uint16_t GSMSim::fmGetFreq() {
 	this->print(F("AT+FMFREQ?\r"));
 	_buffer = _readSerial();
 
@@ -1124,16 +1124,16 @@ uint8_t GSMSim::fmGetFreq() {
 }
 
 // SET FM RADIO FREQ
-bool GSMSim::fmSetFreq(uint8_t freq) {
+bool GSMSim::fmSetFreq(uint16_t freq) {
 	this->print(F("AT+FMFREQ="));
-	uint8_t frekans = 875;
+	
 	if (freq < 875) {
-		frekans = 875;
+		freq = 875;
 	}
 	if (freq > 1080) {
-		frekans = 1080;
+		freq = 1080;
 	}
-	this->print(frekans);
+	this->print(freq);
 	this->print(F("\r"));
 
 	_buffer = _readSerial();
