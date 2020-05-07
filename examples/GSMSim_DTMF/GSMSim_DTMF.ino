@@ -1,7 +1,7 @@
 /*
- * GSMSimEmail Example
+ * GSMSimDTMF Example
  * 
- * GSMSim_Email.ino
+ * GSMSim_DTMF.ino
  *
  * By Erdem ARSLAN
  * Version: v.2.0.1
@@ -32,21 +32,23 @@
   ### Example Serial Output ###
 
  	Set Phone Function... 1
-  is Module Registered to Network?... 1
-  Signal Quality... 12
-  Operator Name... Turk Telekom
-  Connect GPRS... 1
-  Get IP Address... xxx.xxx.xxx.xxx
-  Set GMail... 1
-  Write Email... OK
-  Send Email... SUCCESS:EMAIL_SEND
-  Close GPRS... 1
-
+	is Module Registered to Network?... 1
+	Signal Quality... 14
+	Operator Name... Turk Telekom
+	Init Call... 1
+	Set DTMF... 1
+	Call any number... 1
+	After your phone ringing, answer it and use DTMF tones.
+	1. STATUS:RINGING|NUMBER:xxxxxxxxxxxx
+	2. STATUS:ACTIVE|NUMBER:xxxxxxxxxxxx
+	3. 1
+	4. 4
+	5. STATUS:CALLEND|NUMBER:xxxxxxxxxxxx
 
 
 */
 
-#include <GSMSimEmail.h>
+#include <GSMSimDTMF.h>
 
 // You can use any Serial interface. I recommended HardwareSerial. Please use the library with highiest baudrate.
 // In examples, i used HardwareSerial. You can change it anymore.
@@ -55,7 +57,7 @@
 
 static volatile int num = 0;
 
-GSMSimEmail email(Serial1, RESET_PIN); // GSMSimEmail inherit from GSMSimGPRS. You can use GSMSim and GSMSimGPRS methods with it.
+GSMSimDTMF call(Serial1, RESET_PIN); // GSMSimDTMF inherit from GSMSimCall. You can use GSMSim and GSMSimCall methods with it.
 
 void setup() {
   Serial1.begin(115200); // If you dont change module baudrate, it comes with auto baudrate.
@@ -67,56 +69,37 @@ void setup() {
   Serial.begin(115200); // Serial for debug...
 
   // Init module...
-  email.init(); // use for init module. Use it if you dont have any valid reason.
+  call.init(); // use for init module. Use it if you dont have any valid reason.
 
   Serial.print("Set Phone Function... ");
-  Serial.println(email.setPhoneFunc(1));
+  Serial.println(call.setPhoneFunc(1));
   //delay(1000);
 
   Serial.print("is Module Registered to Network?... ");
-  Serial.println(email.isRegistered());
+  Serial.println(call.isRegistered());
   //delay(1000);
 
   Serial.print("Signal Quality... ");
-  Serial.println(email.signalQuality());
+  Serial.println(call.signalQuality());
   //delay(1000);
 
   Serial.print("Operator Name... ");
-  Serial.println(email.operatorNameFromSim());
+  Serial.println(call.operatorNameFromSim());
   //delay(1000);
 
-
-  //Serial.print("GPRS Init... ");
-  //Serial.println(email.gprsInit("internet")); // Its optional. You can set apn, user and password with this method. Default APN: "internet" Default USER: "" Default PWD: ""
+  Serial.print("Init Call... ");
+  Serial.println(call.initCall()); // Its optional but highly recommended. Some function work with this function.
   //delay(1000);
 
-
-  Serial.print("Connect GPRS... ");
-  Serial.println(email.connect());
-  //delay(1000);
-
-  Serial.print("Get IP Address... ");
-  Serial.println(email.getIP());
+  Serial.print("Set DTMF... ");
+  Serial.println(call.setDTMF(true, 100, false, false)); // Its optional but highly recommended. Some function work with this function.
   //delay(1000);
   
-  // you cannot use @gmail.com for username
-  // If you used 2-step verification, create an app password and use it in here. No other settings required.
-  // Help for create an app password please check: https://support.google.com/accounts/answer/185833?hl=en&ctx=ch_b%2F0%2FDisplayUnlockCaptcha
-  Serial.print("Set GMail... ");
-  Serial.println(email.gmail("your_gmail_username", "password"));
+  Serial.print("Call any number... ");
+  Serial.println(call.call("xxxxxxxxxxxx"));
   //delay(1000);
 
-  Serial.print("Write Email... ");
-  Serial.println(email.write("your_gmail_address@gmail.com", "anybody_email_address_to_send@xxxxxxx.tdl", "Subject", "Mail Body"));
-  //delay(1000);
-
-  Serial.print("Send Email... ");
-  Serial.println(email.send());
-  //delay(1000);
-
-  Serial.print("Close GPRS... ");
-  Serial.println(email.closeConn());
-  //delay(1000);
+  Serial.println("After your phone ringing, answer it and use DTMF tones.");
 
   // For other methods please look at readme.txt file.
 
@@ -131,7 +114,17 @@ void loop() {
       num = num + 1;
       Serial.print(num);
       Serial.print(". ");
-      Serial.println(buffer);
+
+      // This example for how you catch incoming calls.
+      if(buffer.indexOf("+CLCC:") != -1) {
+        Serial.println(call.readCurrentCall(buffer));
+      }
+      else if(buffer.indexOf("+DTMF:") != -1) {
+        Serial.println(call.readDTMF(buffer));
+      }
+      else {
+        Serial.println(buffer);
+      }
   }
   
   // put your main code here, to run repeatedly:

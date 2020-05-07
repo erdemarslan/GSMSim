@@ -1,7 +1,7 @@
 /*
- * GSMSimEmail Example
+ * GSMSimHTTP Example
  * 
- * GSMSim_Email.ino
+ * GSMSim_HTTP.ino
  *
  * By Erdem ARSLAN
  * Version: v.2.0.1
@@ -31,22 +31,21 @@
 /*
   ### Example Serial Output ###
 
- 	Set Phone Function... 1
+  Set Phone Function... 1
   is Module Registered to Network?... 1
-  Signal Quality... 12
+  Signal Quality... 14
   Operator Name... Turk Telekom
   Connect GPRS... 1
   Get IP Address... xxx.xxx.xxx.xxx
-  Set GMail... 1
-  Write Email... OK
-  Send Email... SUCCESS:EMAIL_SEND
+  Get... METHOD:GET|HTTPCODE:200|LENGTH:30
+  Get with SSL and read returned data... METHOD:GET|HTTPCODE:200|LENGTH:30|DATA:This test data return from GET
+  Post... METHOD:POST|HTTPCODE:200|LENGTH:54
+  Post with SSL and read returned data... METHOD:POST|HTTPCODE:200|LENGTH:54|DATA:This test data return from POST.<br>Hello Erdem Arslan
   Close GPRS... 1
-
-
 
 */
 
-#include <GSMSimEmail.h>
+#include <GSMSimHTTP.h>
 
 // You can use any Serial interface. I recommended HardwareSerial. Please use the library with highiest baudrate.
 // In examples, i used HardwareSerial. You can change it anymore.
@@ -55,7 +54,7 @@
 
 static volatile int num = 0;
 
-GSMSimEmail email(Serial1, RESET_PIN); // GSMSimEmail inherit from GSMSimGPRS. You can use GSMSim and GSMSimGPRS methods with it.
+GSMSimHTTP http(Serial1, RESET_PIN); // GSMSimHTTP inherit from GSMSimGPRS. You can use GSMSim and GSMSimGPRS methods with it.
 
 void setup() {
   Serial1.begin(115200); // If you dont change module baudrate, it comes with auto baudrate.
@@ -67,55 +66,57 @@ void setup() {
   Serial.begin(115200); // Serial for debug...
 
   // Init module...
-  email.init(); // use for init module. Use it if you dont have any valid reason.
+  http.init(); // use for init module. Use it if you dont have any valid reason.
 
   Serial.print("Set Phone Function... ");
-  Serial.println(email.setPhoneFunc(1));
+  Serial.println(http.setPhoneFunc(1));
   //delay(1000);
 
   Serial.print("is Module Registered to Network?... ");
-  Serial.println(email.isRegistered());
+  Serial.println(http.isRegistered());
   //delay(1000);
 
   Serial.print("Signal Quality... ");
-  Serial.println(email.signalQuality());
+  Serial.println(http.signalQuality());
   //delay(1000);
 
   Serial.print("Operator Name... ");
-  Serial.println(email.operatorNameFromSim());
+  Serial.println(http.operatorNameFromSim());
   //delay(1000);
 
 
   //Serial.print("GPRS Init... ");
-  //Serial.println(email.gprsInit("internet")); // Its optional. You can set apn, user and password with this method. Default APN: "internet" Default USER: "" Default PWD: ""
+  //Serial.println(http.gprsInit("internet")); // Its optional. You can set apn, user and password with this method. Default APN: "internet" Default USER: "" Default PWD: ""
   //delay(1000);
 
 
   Serial.print("Connect GPRS... ");
-  Serial.println(email.connect());
+  Serial.println(http.connect());
   //delay(1000);
 
   Serial.print("Get IP Address... ");
-  Serial.println(email.getIP());
-  //delay(1000);
+  Serial.println(http.getIP());
+  delay(1000);
   
-  // you cannot use @gmail.com for username
-  // If you used 2-step verification, create an app password and use it in here. No other settings required.
-  // Help for create an app password please check: https://support.google.com/accounts/answer/185833?hl=en&ctx=ch_b%2F0%2FDisplayUnlockCaptcha
-  Serial.print("Set GMail... ");
-  Serial.println(email.gmail("your_gmail_username", "password"));
-  //delay(1000);
+ 
+  Serial.print("Get... ");
+  Serial.println(http.get("sera.erdemarslan.com/test.php"));
+  delay(1000);
 
-  Serial.print("Write Email... ");
-  Serial.println(email.write("your_gmail_address@gmail.com", "anybody_email_address_to_send@xxxxxxx.tdl", "Subject", "Mail Body"));
-  //delay(1000);
+  Serial.print("Get with SSL and read returned data... ");
+  Serial.println(http.getWithSSL("erdemarslan.com/test.php", true));
+  delay(1000);
 
-  Serial.print("Send Email... ");
-  Serial.println(email.send());
-  //delay(1000);
+  Serial.print("Post... ");
+  Serial.println(http.post("sera.erdemarslan.com/test.php", "name=Erdem&surname=Arslan", "application/x-www-form-urlencoded"));
+  delay(1000);
+
+  Serial.print("Post with SSL and read returned data... ");
+  Serial.println(http.post("erdemarslan.com/test.php", "name=Erdem&surname=Arslan", "application/x-www-form-urlencoded", true));
+  delay(1000);
 
   Serial.print("Close GPRS... ");
-  Serial.println(email.closeConn());
+  Serial.println(http.closeConn());
   //delay(1000);
 
   // For other methods please look at readme.txt file.

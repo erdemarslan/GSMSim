@@ -1,169 +1,217 @@
-## GSMSim Library for Arduino (for SimCom Modules like SIM800L, SIM900 etc)
+# GSMSim Library for Arduino (for SimCom Modules like SIM800L, SIM900 etc)
 
-This library for Arduino to use SimCom GSM Modules. This library tested on Sim800L (5V Module). Some functions may not work other SimCom Modules like FM Radio functions. This library may work other gsm shields or modules. But some AT Commands only work SimCom modules. So some functions may not work on other gsm shield or module (etc A6 Ai-Thinker)
+This library for Arduino to use SimCom GSM Modules. This library tested on Sim800L (5V Module). Some methods may not work all SimCom Modules like FM Radio methods. This library may work other gsm shields or modules. But some AT Commands only work SimCom modules. So some functions may not work on other gsm shield or module (etc A6 Ai-Thinker)
 
-This library use SoftwareSerial library. So please dont forget this library's limits. Dont use this library on Arduino's hardware serial ports 0 and 1!
+This library use any Serial library like HardwareSerial, SoftwareSerial etc. If you use SoftwareSerial, please dont forget this library's limits.
 
-### Connection & Pinouts
-Arduino Uno  |   Sim800L   |    Notes  
+### ChangeLog
+#### v.2.0.1
+* GSMSim now can be use with any serial interface. Hardware or Software
+* added some new methods.
+* Changed many method names. There is no backward compatibility.
+* Fixed and added issue#26, issue#24, issue#19, issue#17,issue#14, issue#13, issue#12, issue#1
+#### v.1.0.9
+* First public release.
+#### v.1.0.0
+* First release for personal use.
+
+## Connection & Pinouts
+Arduino |   Sim800L   |    Notes  
 -------------|-------------|------------
 +5v| (3.8v)~(4.4v)!| Power supply input
-7 RX_PIN | TX |  
-8 TX_PIN | RX |
-2   RESET_PIN | RST| Reset Pin
+RX_PIN | TX |  
+TX_PIN | RX |
+RESET_PIN | RST| Reset Pin
 GND | GND |
 
-### How I use this library?
+DEFAULT RESET PIN => 2
+DEFAULT LED PIN => 13
+DEFAULT LED FLAG => true
 
-Firstly inport this library on your Arduino IDE. Then you can use this:
+## How I use this library?
 
-```markdown
-#import <GSMSim.h>
+Please visit the example pages.
 
-#define RX 7
-#define TX 8
-#define RESET 2
-#define BAUD 9600
+## Recommendation
+* If it possible, use HardwareSerial. SoftwareSerial a bit laggy.
+* Use highiest baudrate as you can. (I test on HardwareSerial 115200 baudrate, SoftwareSerial 57600 baudrate)
+* Please chooice good power supply. I recommend 5V power supply and 1A or over. (Sim800L EVB Board)
+* If the signal is weak or the power supply is insufficient, the module can reset itself on load.
 
-/*
- * Defaults => RX: 7 | TX: 8 | Reset: 2 | LED Pin: 13 | LED Flag: true | Baud Rate: 9600
- * GSMSim gsm;
- * GSMSim gsm(RX, TX);
- * GSMSim gsm(RX, TX, RESET);
- * GSMSim gsm(RX, TX, RESET, LED_PIN, LED_FLAG);
- */
 
-GSMSim gsm(RX, TX, RESET);
+## Which methods can i use?
 
-void setup() {
-  gsm.start();
-  //gsm.start(9600);
-}
+### GSMSim Methods
+*All this methods can use with any GSMSim* classes. All GSMSim* classes inherit from GSMSim class.*
 
-```
-
-For more details see Examples.
-
-### Which functions i can use?
-
-#### Module Functions
-
-Name|Return|Notes
+Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
-start()|none|Begin the library with 9600 baud rate
-start(uint8_t baud_rate)|none|Begin the library with given baud rate
-reset()|none|Reset the module
-setPhoneFunc(uint8_t level)|true or false|level can be take 0,1 or 4 0-minimum, 1-full, 4-disable
+init()|void|Method init reset pin, led pin and led flag.
+reset()|void|Reset module with reset pin.
+sendATCommand(char* command)|String|You can send AT commands manualy. Dont use \r char in command.
+setPhoneFunc(int level)|bool|Set phone function. level can be 0,1 or 4. 0-minimum, 1-full, 4-disable
 signalQuality()|integer|0-31 -> 0-poor, 31-full, 99-unknown
-isRegistered()|true or false|Is module connected to gsm operator?
-isSimInserted()|true or false|
-pinStatus()|integer|0-ready, 1-sim pin, 2-sim puk, 3-ph sim pin, 4-ph sim puk, 5-sim pin2, 6-sim puk2, 7-unknown
-operatorName()|String|returns NOT_CONNECTED if not connected!
-operatorNameFromSim()|String|Only works on simcom modules. returns NOT_CONNECTED if not connected!
+isRegistered()|bool|Is module connect to gsm operator?
+isSimInserted()|bool|
+pinStatus()|int|0-ready, 1-sim pin, 2-sim puk, 3-ph sim pin, 4-ph sim puk, 5-sim pin2, 6-sim puk2, 7-unknown
+enterPinCode(char* pinCode)|bool|Enter pin code if module locked with pin code.
+enablePinCode(char* pinCode)|bool| Enable pin lock.
+disablePinCode(char* pinCode)|bool|Disable pin lock.
+operatorName()|String|If modune not connected it returns NOT_CONNECTED.
+operatorNameFromSim()|String|Only works on SimCom modules. If modune not connected it returns NOT_CONNECTED.
 phoneStatus()|integer|Phone activity status 0-ready, 2-unknown, 3-ringing, 4-call in progress, 99-unkonown
-echoOff()|true or false|Echo mode off (for module)
-echoOn()|true or false|Echo mode on (for module)
+echoOff()|bool|Echo off AT command on execute result. GSMSim class automaticly set echoOff on init.
+echoOn()|bool|Echo AT command on execute result.
 moduleManufacturer()|String|
 moduleModel()|String|
 moduleRevision()|String|
 moduleIMEI()|String|
+moduleIMEIChange(char* imeino)|bool|Change IMEI. Changing the IMEI is prohibited by the laws of some countries. In this regard, comply with the laws of your country. You've been warned.
 moduleIMSI()|String|
 moduleICCID()|String|
 ringerVolume()|integer|
-setRingerVolume(uint8_t level)|true or false|level must between 0-100
+setRingerVolume(uint8_t level)|bool|true or false|level must between 0-100
 speakerVolume()|integer|
-setSpeakerVolume(uint8_t level)|true or false|level must between 0-100
-moduleDebug()|String|print verbose
+setSpeakerVolume(uint8_t level)|bool|level must between 0-100
+moduleDebug()|String|Print verbose.
+saveSettingsToModule()|bool|Save some setting to module EEPROM.
 
+### GSMSimCall Methods
+*This class inherit from GSMSim class. You can use GSMSim class methods with this class.
 
-#### Call functions
-Name|Return|Notes
+Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
-call(char* phone_number)|true or false|If colp active, it always return true.
-callAnswer()|true or false|
-callHangoff()|true of false|
-callStatus()|integer|Return codes as same as phoneStatus function
-callSetCOLP(bool active)|true or false|If active is true, when call status change, module send call details to SoftwareSerial
-callIsCOLPActive|true or false|True COLP is active else passive
-callActivateListCurrent(bool active)|true or false|say the caller :)
-callReadCurrentCall(String serialRaw)|String|Return call status and number like STATUS:xxx\|NUMBER:xxx - This only read when you give raw serial data to this function. It not fetch the raw serial data!
+initCall()|bool|Init call function. If you use other methods correctly, add your code this method.
+call(char* phone_number)|bool|
+answer()|bool|
+hangoff()|bool|
+status()|integer|Return codes as same as phoneStatus function
+setCLIP(bool active)|bool|
+setCLIR(bool active)|bool|
+setCOLP(bool active)|bool|
+isCOLPActive()|bool|
+showCurrentCall(bool active)|bool|
+readCurrentCall(String serialRaw)|String|Return call status and number like STATUS:xxx\|NUMBER:xxx - This only read when you give raw serial data to this function. It not fetch the raw serial data!
+setCallReject(bool rejectAll)|bool|Enable or disable reject call automaticly.
 
 
-#### SMS functions
-Name|Return|Notes
+### GSMSimDTMF Methods
+*This class inherit from GSMSimCall class. You can use GSMSim and GSMSimCall classes methods with this class.
+
+Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
-smsTextMode(bool textModeON)|true or false|TEXT mode or PDU mode.
-smsSend(char* number, char* message)|true or false|Message must be in 160 characters and in text mode only use ascii characters.
-smsListUnread()|String|If no message found it returns NO_SMS else returns SMSIndexNo:x,y,z. If you have a lot of un read messages, return only SMSIndexNo:
-smsRead(uint8_t index)|String|If not message on given index, it return INDEX_NO_ERROR else a string about message.
-smsRead(uint8_t index, bool markRead)|String|This function can mark message read or unread when opened.
-smsReadFromSerial(String serialRaw)|String|Read sms from serial raw data.
-smsIndexFromSerial(String serialRaw)|integer|Get sms index number from serial raw.
-smsReadMessageCenter()|String|Get SMS Message Center number.
-smsChangeMessageCenter(char* messageCenter)|true or false|Change SMS Message Center number.
-smsDeleteOne(uint8_t index)|true or false|Delete sms in given index.
-smsDeleteAllRead()|true or false|Delete all read messages.
-smsDeleteAll()|true or false|Delete all messages.
+setDTMF(bool active, unsigned int interval, bool reportTime, bool soundDetect)|bool|Activate or deactivate DTMF tones.
+readDTMF(String serialRaw)|String|Get pressed key info from DTMF on serial raw data.
 
-#### DTMF functions
-Name|Return|Notes
+
+### GSMSimUSSD Methods
+*This class inherit from GSMSimCall class. You can use GSMSim and GSMSimCall classes methods with this class.
+
+Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
-dtmfSet(bool active, uint8_t interval, bool reportTime, bool soundDetect)|true or false|Activate or deactivate DTMF tones.
-dtmfRead(String serialRaw)|String|Get pressed key info from DTMF on serial raw data.
+sendUSSD(char* code)|bool|Send USSD command.
+readUSSD(String serialRaw)|String|Read USSD response from serial raw value.
 
 
-#### USSD functions
-Name|Return|Notes
+### GSMSimSMS Methods
+*This class inherit from GSMSim class. You can use GSMSim class methods with this class.
+
+Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
-ussdSend(char* code)|true or false|Send USSD command.
-ussdRead(String serialRaw)|String|
+initSMS()|bool|Init sms function. If you use other methods correctly, add your code this method.
+setTextMode(bool textModeON)|bool|Text Mode or PDU Mode. This class works with TEXT Mode.
+setPreferredSMSStorage(char* mem1, char* mem2, char* mem3)|bool|"ME" (Module), "SM" (Sim), "ME_P" (Module Preferred), "SM_P" (Sim Preferred), "MT" (ME or SM, Sim Preferred). Class use "ME" for all memories.
+setNewMessageIndication()|bool|
+setCharset(char* charset)|bool|"IRA","GSM","UCS2","HEX","PCCP","PCDN","8859-1". Class use IRA charset.
+send(char* number, char* message)|bool|
+list(bool onlyUnread)|String|If no message found it returns NO_SMS else returns SMSIndexNo:x,y,z. If onlyUnread equal to false, method returns ALL messages.
+read(unsigned int index)|String|Read message from given index.
+read(unsigned int index, bool markRead)|String|Read message from given index. If markRead equal to false, message not set to READ.
+getSenderNo(unsigned int index)|String|Give the message sender number.
+readFromSerial(String serialRaw)|String|Read message from serial raw value.
+indexFromSerial(String serialRaw)|integer|Get message index number from serial raw value.
+readMessageCenter()|String|
+changeMessageCenter(char* messageCenter)|bool|
+deleteOne(unsigned int index)|bool|Delete sms in given index.
+deleteAllRead()|bool|Delete all read messages.
+deleteAll()|bool|Delete all messages.
 
-#### FM Radio functions
-Name|Return|Notes
+
+### GSMSimFMRadio Methods
+*This class inherit from GSMSim class. You can use GSMSim class methods with this class.
+
+Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
 fmOpen()|true or false|Open fm radio.
 fmOpen(bool mainChannel)|true or false|Open fm radio. true is main channel, false is aux channel.
-fmOpen(bool mainChannel, uint8_t freq)|true or false|Frequency must be between 875 and 1080. 875 is 87.5 MHz.
+fmOpen(bool mainChannel, uint16_t freq)|true or false|Frequency must be between 875 and 1080. 875 is 87.5 MHz.
 fmIsOpened()|true or false|Return radio status.
 fmClose()|true or false|
 fmGetFreq()|integer|
-fmSetFreq(uint8_t freq)|true or false|875 to 1080
+fmSetFreq(uint16_t freq)|true or false|875 to 1080
 fmGetVolume()|integer|
-fmSetVolume(uint8_t volume)|true or false|
+fmSetVolume(uint16_t volume)|true or false|
 
-#### GPRS functions
-Name|Return|Notes
+
+### GSMSimGPRS Methods
+*This class inherit from GSMSim class. You can use GSMSim class methods with this class.
+When you call this class, it automaticly load default APN, USER and PWD values. If you want to change this values, use gprsInit() method for this.
+DEFAULT APN => "internet"
+DEFAULT USER => ""
+DEFAULT PWD => ""
+
+Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
-gprsConnectBearer()|true or false|APN=internet, USER="", PASS=""
-gprsConnectBearer(String apn)|true or false|
-gprsConnectBearer(String apn, String user, String password)|true or false|
-gprsIsConnected()|true or false|Return gprs connection status.
-gprsGetIP()|String|Return IP Address
-gprsCloseConn()|true or false|
-gprsHTTPGet(String url)|String|Only get about response info, http code etc.
-gprsHTTPGet(String url, bool read)|String|Get with response.
+gprsInit(String apn)|void|Set only APN value
+gprsInit(String apn, String user, String password)|void|Set APN, USER and PWD values.
+connect()|bool|Connect to GPRS
+isConnected()|bool|
+getIP()|String|Get IP v4 address.
+closeConn()|bool|
 
+### GSMSimHTTP Methods
+*This class inherit from GSMSimGPRS class. You can use GSMSim and GSMSimGPRS classes methods with this class.
 
-#### Time functions
-Name|Return|Notes
+Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
-timeSetServer(int timezone)|true or false|Require active internet connection
-timeSetServer(int timezone, String server)|true or false|
-timeSyncFromServer()|true or false|Sync time from server. Require an active internet connection.
-timeGetRaw()|String|Get raw time.
-timeGet(int *day, int *month, int *year, int *hour, int *minute, int *second)|void|
+get(String url)|String|Use GET method. It not returns web page response. Only HTTP method, status code and response lenght.
+get(String url, bool read)|String|If read equal to true it returns HTTP method, status code, response lenght and web page response.
+getWithSSL(String url)|String|Same as get(String url) but it connect to SSL sites.
+getWithSSL(String url, bool read)|String|Same as get(String url, bool read ) but it connect to SSL sites.
+post(String url, String data, String contentType)|String|Use POST method. It not returns web page response. Only HTTP method, status code and response lenght.
+post(String url, String data, String contentType, bool read)|String|If read equal to true it returns HTTP method, status code, response lenght and web page response.
+postWithSSL(String url, String data, String contentType)|String|Same as post(String url, String data, String contentType) but it connect to SSL sites.
+postWithSSL(String url, String data, String contentType, bool read)|String|Same as post(String url, String data, String contentType) but it connect to SSL sites.
+ping(String address)|String|Its to laggy. It returns raw AT response. Its experimental.
 
 
-#### Time functions
-Name|Return|Notes
+### GSMSimEmail Methods
+*This class inherit from GSMSimGPRS class. You can use GSMSim and GSMSimGPRS classes methods with this class.
+Note: All commands for SMTP. For Gmail please look at example files.
+
+Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
-emailSMTPConf(String server, String port, bool useSSL)|true or false|Set SMTP Server configuration.
-emailSMTPAuth(String username, String password)|true or false|
-emailSMTPAuth(String username, String password, bool requireAuth)|true or false|
-emailSMTPGmail(String username, String password)|true or false|If you want to send email over GMAIL, you can use this function for set server requirements.
-emailSMTPWrite(String from, String to, String title, String message)|String|Return OK if success.
-emailSMTPWrite(String from, String to, String title, String message, String fromName, String toName)|String|Return OK if success.
-emailSMTPSend()|String|Return SUCCESS:EMAIL_SEND if send status ok. Else return ERROR:Error_Type
+setServer(String server, String port, bool useSSL)|bool|Set SMTP Server configuration.
+auth(String username, String password)|bool|
+auth(String username, String password, bool requireAuth)|bool|
+gmail(String username, String password)|bool|If you want to send email over GMAIL, you can use this method for set server requirements.
+write(String from, String to, String title, String message)|String|Return OK if success.
+write(String from, String to, String title, String message, String fromName, String toName)|String|Return OK if success.
+send()|String|Return SUCCESS:EMAIL_SEND if send status ok. Else return ERROR:Error_Type
+
+
+### GSMSimTime Methods
+*This class inherit from GSMSimGPRS class. You can use GSMSim and GSMSimGPRS classes methods with this class.
+
+
+Method Name |Return   |Notes
+:-------|:-------:|:-----------------------------------------------:|
+setServer(int timezone)|bool|
+setServer(int timezone, String server)|bool|
+syncFromServer()|String|
+getRaw()|String|
+get(int *day, int *month, int *year, int *hour, int *minute, int *second)|void|
+
 
 
 ### Credits
@@ -178,3 +226,4 @@ Thanks.
 ### Support or Contact
 
 If you have any question about this library, please contact only on GitHub.
+

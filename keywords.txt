@@ -6,170 +6,139 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-GSMSim	KEYWORD1
+GSMSim					KEYWORD1
+GSMSimCall				KEYWORD1
+GSMSimDTMF				KEYWORD1
+GSMSimEmail				KEYWORD1
+GSMSimFMRadio			KEYWORD1
+GSMSimGPRS				KEYWORD1
+GSMSimHTTP				KEYWORD1
+GSMSimSMS				KEYWORD1
+GSMSimTime				KEYWORD1
+GSMSimUSSD				KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-start	KEYWORD2
-reset	KEYWORD2
-readSerial	KEYWORD2
-setPhoneFunc	KEYWORD2
-signalQuality	KEYWORD2
-isRegistered	KEYWORD2
-isSimInserted	KEYWORD2
-pinStatus	KEYWORD2
-operatorName	KEYWORD2
-operatorNameFromSim	KEYWORD2
-phoneStatus	KEYWORD2
-echoOff	KEYWORD2
-echoOn	KEYWORD2
-moduleManufacturer	KEYWORD2
-moduleModel	KEYWORD2
-moduleRevision	KEYWORD2
-moduleIMEI	KEYWORD2
-moduleIMEIChange	KEYWORD2
-moduleIMSI	KEYWORD2
-moduleICCID	KEYWORD2
-ringerVolume	KEYWORD2
-setRingerVolume	KEYWORD2
-speakerVolume	KEYWORD2
-setSpeakerVolume	KEYWORD2
-moduleDebug	KEYWORD2
-call	KEYWORD2
-callAnswer	KEYWORD2
-callHangoff	KEYWORD2
-callStatus	KEYWORD2
-callSetCOLP	KEYWORD2
-callIsCOLPActive	KEYWORD2
-callActivateListCurrent	KEYWORD2
-callReadCurrentCall	KEYWORD2
-smsTextMode	KEYWORD2
-smsSend	KEYWORD2
-smsListUnread	KEYWORD2
-smsRead	KEYWORD2
-smsReadFromSerial	KEYWORD2
-smsIndexFromSerial	KEYWORD2
-smsReadMessageCenter	KEYWORD2
-smsChangeMessageCenter	KEYWORD2
-smsDeleteOne	KEYWORD2
-smsDeleteAllRead	KEYWORD2
-smsDeleteAll	KEYWORD2
-smsChangeIncomingIndicator	KEYWORD2
-dtmfSet	KEYWORD2
-dtmfRead	KEYWORD2
-ussdSend	KEYWORD2
-ussdRead	KEYWORD2
-fmOpen	KEYWORD2
-fmIsOpened	KEYWORD2
-fmClose	KEYWORD2
-fmGetFreq	KEYWORD2
-fmSetFreq	KEYWORD2
-fmGetVolume	KEYWORD2
-fmSetVolume	KEYWORD2
-gprsConnectBearer	KEYWORD2
-gprsIsConnected	KEYWORD2
-gprsGetIP	KEYWORD2
-gprsCloseConn	KEYWORD2
-gprsHTTPGet	KEYWORD2
-timeSetServer	KEYWORD2
-timeSyncFromServer	KEYWORD2
-timeGet	KEYWORD2
+
+# Methods for GSMSim and All of other GSMSim classes.
+
+init					KEYWORD2
+reset					KEYWORD2
+readSerial				KEYWORD2
+sendATCommand			KEYWORD2
+setPhoneFunc			KEYWORD2
+signalQuality			KEYWORD2
+isRegistered			KEYWORD2
+isSimInserted			KEYWORD2
+pinStatus				KEYWORD2
+enterPinCode			KEYWORD2
+enablePinCode			KEYWORD2
+disablePinCode			KEYWORD2
+operatorName			KEYWORD2
+operatorNameFromSim		KEYWORD2
+phoneStatus				KEYWORD2
+echoOff					KEYWORD2
+echoOn					KEYWORD2
+moduleManufacturer		KEYWORD2
+moduleModel				KEYWORD2
+moduleRevision			KEYWORD2
+moduleIMEI				KEYWORD2
+moduleIMEIChange		KEYWORD2
+moduleIMSI				KEYWORD2
+moduleICCID				KEYWORD2
+ringerVolume			KEYWORD2
+setRingerVolume			KEYWORD2
+speakerVolume			KEYWORD2
+setSpeakerVolume		KEYWORD2
+moduleDebug				KEYWORD2
+saveSettingsToModule	KEYWORD2
+
+# Methods for GSMSimCall. Its inherit GSMSim class.
+
+initCall				KEYWORD2
+call					KEYWORD2
+answer					KEYWORD2
+hangoff					KEYWORD2
+status					KEYWORD2
+setCLIP					KEYWORD2
+setCLIR					KEYWORD2
+setCOLP					KEYWORD2
+isCOLPActive			KEYWORD2
+showCurrentCall			KEYWORD2
+readCurrentCall			KEYWORD2
+setCallReject			KEYWORD2
+
+# Methods for GSMSimDTMF. Its inherit GSMSimCall class.
+
+setDTMF					KEYWORD2
+readDTMF				KEYWORD2
+
+# Methods for GSMSimEmail. Its inherit GSMSimGPRS class.
+
+setServer				KEYWORD2
+auth					KEYWORD2
+gmail					KEYWORD2
+write					KEYWORD2
+send					KEYWORD2
+
+# Methods for GSMSimFMRadio. Its inherit GSMSim class.
+
+fmOpen					KEYWORD2
+fmIsOpened				KEYWORD2
+fmClose					KEYWORD2
+fmGetFreq				KEYWORD2
+fmSetFreq				KEYWORD2
+fmGetVolume				KEYWORD2
+fmSetVolume				KEYWORD2
 
 
-# Methods for Module (KEYWORD2)
-#######################################
-start	KEYWORD2
-reset	KEYWORD2
-readSerial	KEYWORD2
-setPhoneFunc	KEYWORD2
-signalQuality	KEYWORD2
-isRegistered	KEYWORD2
-isSimInserted	KEYWORD2
-pinStatus	KEYWORD2
-operatorName	KEYWORD2
-operatorNameFromSim	KEYWORD2
-phoneStatus	KEYWORD2
-echoOff	KEYWORD2
-echoOn	KEYWORD2
-moduleManufacturer	KEYWORD2
-moduleModel	KEYWORD2
-moduleRevision	KEYWORD2
-moduleIMEI	KEYWORD2
-moduleIMEIChange	KEYWORD2
-moduleIMSI	KEYWORD2
-moduleICCID	KEYWORD2
-ringerVolume	KEYWORD2
-setRingerVolume	KEYWORD2
-speakerVolume	KEYWORD2
-setSpeakerVolume	KEYWORD2
-moduleDebug	KEYWORD2
+# Methods for GSMSimGPRS. Its inherit GSMSim class.
 
-# Methods for Call (KEYWORD2)
-#######################################
-call	KEYWORD2
-callAnswer	KEYWORD2
-callHangoff	KEYWORD2
-callStatus	KEYWORD2
-callSetCOLP	KEYWORD2
-callIsCOLPActive	KEYWORD2
-callActivateListCurrent	KEYWORD2
-callReadCurrentCall	KEYWORD2
+gprsInit				KEYWORD2
+connect					KEYWORD2
+isConnected				KEYWORD2
+getIP					KEYWORD2
+closeConn				KEYWORD2
 
-# Methods for SMS  (KEYWORD2)
-#######################################
-smsTextMode	KEYWORD2
-smsSend	KEYWORD2
-smsListUnread	KEYWORD2
-smsRead	KEYWORD2
-smsReadFromSerial	KEYWORD2
-smsIndexFromSerial	KEYWORD2
-smsReadMessageCenter	KEYWORD2
-smsChangeMessageCenter	KEYWORD2
-smsDeleteOne	KEYWORD2
-smsDeleteAllRead	KEYWORD2
-smsDeleteAll	KEYWORD2
-smsChangeIncomingIndicator	KEYWORD2
 
-# Methods for DTMF  (KEYWORD2)
-#######################################
-dtmfSet	KEYWORD2
-dtmfRead	KEYWORD2
+# Methods for GSMSimEmail. Its inherit GSMSimGPRS class.
 
-# Methods for USSD  (KEYWORD2)
-#######################################
-ussdSend	KEYWORD2
-ussdRead	KEYWORD2
+get						KEYWORD2
+getWithSSL				KEYWORD2
+post					KEYWORD2
+postWithSSL				KEYWORD2
+ping					KEYWORD2
 
-# Methods for FM RADIO  (KEYWORD2)
-#######################################
-fmOpen	KEYWORD2
-fmIsOpened	KEYWORD2
-fmClose	KEYWORD2
-fmGetFreq	KEYWORD2
-fmSetFreq	KEYWORD2
-fmGetVolume	KEYWORD2
-fmSetVolume	KEYWORD2
 
-# Methods for GPRS	  (KEYWORD2)
-#######################################
-gprsConnectBearer	KEYWORD2
-gprsIsConnected	KEYWORD2
-gprsGetIP	KEYWORD2
-gprsCloseConn	KEYWORD2
-gprsHTTPGet	KEYWORD2
+# Methods for GSMSimSMS. Its inherit GSMSim class.
 
-# Methods for TIME	   (KEYWORD2)
-#######################################
-timeSetServer	KEYWORD2
-timeSyncFromServer	KEYWORD2
-timeGet	KEYWORD2
-timeGetRaw	KEYWORD2
+initSMS					KEYWORD2
+setTextMode				KEYWORD2
+setPreferredSMSStorage	KEYWORD2
+setNewMessageIndication	KEYWORD2
+setCharset				KEYWORD2
+send					KEYWORD2
+list					KEYWORD2
+read					KEYWORD2
+getSenderNo				KEYWORD2
+readFromSerial			KEYWORD2
+indexFromSerial			KEYWORD2
+readMessageCenter		KEYWORD2
+changeMessageCenter		KEYWORD2
+deleteOne				KEYWORD2
+deleteAllRead			KEYWORD2
+deleteAll				KEYWORD2
 
-# Methods for EMAIL	   (KEYWORD2)
-#######################################
-emailSMTPConf	KEYWORD2
-emailSMTPAuth	KEYWORD2
-emailSMTPGmail	KEYWORD2
-emailSMTPWrite	KEYWORD2
-emailSMTPSend	KEYWORD2
+# Methods for GSMSimTime. Its inherit GSMSim class.
+
+setServer				KEYWORD2
+syncFromServer			KEYWORD2
+getRaw					KEYWORD2
+get						KEYWORD2
+
+
+# Methods for GSMSimUSSD. Its inherit GSMSim class.
+
+ussdSend				KEYWORD2
+ussdRead				KEYWORD2
