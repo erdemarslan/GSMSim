@@ -7,7 +7,7 @@
  * By Erdem ARSLAN
  * Modified 06.05.2020
  *
- * Version: v.2.0.1
+ * Version: v.2.0.2
  *
  * Erdem ARSLAN
  * Science and Technology Teacher, an Arduino Lover =)
@@ -254,6 +254,16 @@ String GSMSimSMS::read(unsigned int index) {
 
 		mesaj.trim();
 
+		// Little Fix for incoming messaged from iPhone
+		String messageHex = "";
+		for(int i = 0; i < mesaj.length(); i++) {
+			messageHex += String(mesaj[i], HEX);
+		}
+
+		if(messageHex.indexOf("ffa5ffa4ffa3ffa3") != -1) {
+			mesaj = mesaj.substring(4);
+		}
+
 		durum = "FOLDER:";
 		durum += klasor;
 		durum += "|STATUS:";
@@ -321,6 +331,17 @@ String GSMSimSMS::read(unsigned int index, bool markRead) {
 		mesaj = tarih_bol.substring(tarih_bol.indexOf("\"")+1, tarih_bol.lastIndexOf("OK"));
 
 		mesaj.trim();
+
+		
+		// Little Fix for incoming messaged from iPhone
+		String messageHex = "";
+		for(int i = 0; i < mesaj.length(); i++) {
+			messageHex += String(mesaj[i], HEX);
+		}
+
+		if(messageHex.indexOf("ffa5ffa4ffa3ffa3") != -1) {
+			mesaj = mesaj.substring(4);
+		}
 
 		durum = "FOLDER:";
 		durum += klasor;

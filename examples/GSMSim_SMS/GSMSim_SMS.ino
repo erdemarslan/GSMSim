@@ -4,7 +4,7 @@
  * GSMSim_SMS.ino
  *
  * By Erdem ARSLAN
- * Version: v.2.0.1
+ * Version: v.2.0.2
  *
  * The MIT License (MIT)
  *
@@ -41,7 +41,7 @@
 	Begin to listen incoming messages...
 	1. SMS Index No... 38
 	Who send the message?...xxxxxxxxxxxx
-	Read the message... FOLDER:INCOMING|STATUS:UNREAD|PHONENO:xxxxxxxxxxxx|DATETIME:20/05/07,16:00:21+12|MESSAGE:⸮⸮⸮⸮Ne olsun. Yazisiyoruz kendimizle ;)
+	Read the message... FOLDER:INCOMING|STATUS:UNREAD|PHONENO:xxxxxxxxxxxx|DATETIME:20/05/07,16:00:21+12|MESSAGE:Ne olsun. Yazisiyoruz kendimizle ;)
 
 
 */
