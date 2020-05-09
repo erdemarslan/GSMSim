@@ -36,6 +36,7 @@ Please visit the example pages.
 * If it possible, use HardwareSerial. SoftwareSerial a bit laggy.
 * Use highiest baudrate as you can. (I test on HardwareSerial 115200 baudrate, SoftwareSerial 57600 baudrate)
 * Please chooice good power supply. I recommend 5V power supply and 1A or over. (Sim800L EVB Board)
+* If it possible, use high SRAM devices like Arduino Mega.
 * If the signal is weak or the power supply is insufficient, the module can reset itself on load.
 
 
@@ -81,7 +82,7 @@ saveSettingsToModule()|bool|Save some setting to module EEPROM.
 
 Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
-initCall()|bool|Init call function. If you use other methods correctly, add your code this method.
+initCall()|bool|Init call function. If you want to use other methods correctly, add your code this method.
 call(char* phone_number)|bool|
 answer()|bool|
 hangoff()|bool|
@@ -118,7 +119,7 @@ readUSSD(String serialRaw)|String|Read USSD response from serial raw value.
 
 Method Name |Return   |Notes
 :-------|:-------:|:-----------------------------------------------:|
-initSMS()|bool|Init sms function. If you use other methods correctly, add your code this method.
+initSMS()|bool|Init sms function. If you want to use other methods correctly, add your code this method.
 setTextMode(bool textModeON)|bool|Text Mode or PDU Mode. This class works with TEXT Mode.
 setPreferredSMSStorage(char* mem1, char* mem2, char* mem3)|bool|"ME" (Module), "SM" (Sim), "ME_P" (Module Preferred), "SM_P" (Sim Preferred), "MT" (ME or SM, Sim Preferred). Class use "ME" for all memories.
 setNewMessageIndication()|bool|
