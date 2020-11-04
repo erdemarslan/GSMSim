@@ -417,7 +417,7 @@ String GSMSimHTTP::post(String url, String data, String contentType) {
 								gsm.print(F("AT+HTTPACTION=1\r"));
 								_readSerial();
 								if (_buffer.indexOf(F("OK")) != -1) {
-									_readSerial(3000);
+									_readSerial(10000);
 									if (_buffer.indexOf(F("+HTTPACTION: 1,")) != -1) {
 										String kod = _buffer.substring(_buffer.indexOf(F(","))+1, _buffer.lastIndexOf(F(",")));
 										String uzunluk = _buffer.substring(_buffer.lastIndexOf(F(","))+1);
@@ -509,7 +509,7 @@ String GSMSimHTTP::post(String url, String data, String contentType, bool read) 
 									gsm.print(F("AT+HTTPACTION=1\r"));
 									_readSerial();
 									if (_buffer.indexOf(F("OK")) != -1) {
-										_readSerial(3000);
+										_readSerial(10000);
 										if (_buffer.indexOf(F("+HTTPACTION: 1,")) != -1) {
 											String kod = _buffer.substring(_buffer.indexOf(F(","))+1, _buffer.lastIndexOf(F(",")));
 											String uzunluk = _buffer.substring(_buffer.lastIndexOf(F(","))+1);
@@ -623,7 +623,7 @@ String GSMSimHTTP::postWithSSL(String url, String data, String contentType) {
 									gsm.print(F("AT+HTTPACTION=1\r"));
 									_readSerial();
 									if (_buffer.indexOf(F("OK")) != -1) {
-										_readSerial(3000);
+										_readSerial(10000);
 										if (_buffer.indexOf(F("+HTTPACTION: 1,")) != -1) {
 											String kod = _buffer.substring(_buffer.indexOf(F(","))+1, _buffer.lastIndexOf(F(",")));
 											String uzunluk = _buffer.substring(_buffer.lastIndexOf(F(","))+1);
@@ -721,7 +721,7 @@ String GSMSimHTTP::postWithSSL(String url, String data, String contentType, bool
 										gsm.print(F("AT+HTTPACTION=1\r"));
 										_readSerial();
 										if (_buffer.indexOf(F("OK")) != -1) {
-											_readSerial(3000);
+											_readSerial(10000);
 											if (_buffer.indexOf(F("+HTTPACTION: 1,")) != -1) {
 												String kod = _buffer.substring(_buffer.indexOf(F(","))+1, _buffer.lastIndexOf(F(",")));
 												String uzunluk = _buffer.substring(_buffer.lastIndexOf(F(","))+1);
