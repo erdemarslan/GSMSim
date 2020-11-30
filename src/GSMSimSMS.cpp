@@ -133,7 +133,6 @@ bool GSMSimSMS::send(char* number, char* message) {
 	_readSerial();
 	str += _buffer;
 	gsm.print(message);
-	gsm.print("\r");
 	//change delay 100 to readserial
 	//_buffer += _readSerial();
 	_readSerial();
