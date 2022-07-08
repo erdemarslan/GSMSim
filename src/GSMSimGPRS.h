@@ -47,6 +47,8 @@
 #define DEFAULT_GPRS_APN    "internet"
 #define DEFAULT_GPRS_USER   ""
 #define DEFAULT_GPRS_PWD    ""
+#define DEFAULT_GPRS_SERVER   ""
+#define DEFAULT_GPRS_PORT    ""
 
 
 class GSMSimGPRS : public GSMSim {
@@ -55,11 +57,13 @@ class GSMSimGPRS : public GSMSim {
     String APN;
     String USER;
     String PWD;
+    String SERVER;
+    String PORT;
 
 
   public :
 
-    // Sınıfı Başlatıcı...
+    // Class Initializer...
     GSMSimGPRS(Stream& s) : GSMSim(s) {
       RESET_PIN = DEFAULT_RST_PIN;
       LED_PIN = DEFAULT_LED_PIN;
@@ -68,6 +72,9 @@ class GSMSimGPRS : public GSMSim {
       APN = DEFAULT_GPRS_APN;
       USER = DEFAULT_GPRS_USER;
       PWD = DEFAULT_GPRS_PWD;
+
+      SERVER = DEFAULT_GPRS_SERVER;
+      PORT = DEFAULT_GPRS_PORT;
     }
 
     GSMSimGPRS(Stream& s, unsigned int resetPin) : GSMSim(s, resetPin) {
@@ -79,6 +86,9 @@ class GSMSimGPRS : public GSMSim {
       APN = DEFAULT_GPRS_APN;
       USER = DEFAULT_GPRS_USER;
       PWD = DEFAULT_GPRS_PWD;
+
+      SERVER = DEFAULT_GPRS_SERVER;
+      PORT = DEFAULT_GPRS_PORT;
     }
 
     GSMSimGPRS(Stream& s, unsigned int resetPin, unsigned int ledPin, bool ledFlag) : GSMSim(s, resetPin, ledPin, ledFlag) {
@@ -90,21 +100,27 @@ class GSMSimGPRS : public GSMSim {
       APN = DEFAULT_GPRS_APN;
       USER = DEFAULT_GPRS_USER;
       PWD = DEFAULT_GPRS_PWD;
+
+      SERVER = DEFAULT_GPRS_SERVER;
+      PORT = DEFAULT_GPRS_PORT;
     }
 
     void gprsInit(String apn);
     void gprsInit(String apn, String user, String password);
-    
+    void gprsInitServer(String server, String port);
     // Connect to Bearer
     bool connect();
-
+    // Connect to server
+    bool gprsServerConn();
+    // Send to server
+    bool gprsSend();//Dont work. should be 5 packets per second. As far as I understand.
     // Check connection
     bool isConnected();
     // get ip address
     String getIP();
     // close gprs bearer connection
+    bool closeContext();
     bool closeConn();
 
 };
-
 #endif
