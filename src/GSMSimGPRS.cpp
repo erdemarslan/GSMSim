@@ -46,11 +46,15 @@ void GSMSimGPRS::gprsInit(String apn, String user, String password) {
 	USER = user;
 	PWD = password;
 }
+void GSMSimGPRS::gprsInitServer(String server, String port) {
+	SERVER = server;
+	PORT = port;
+}
+
 // Connect to GPRS Bearer
 bool GSMSimGPRS::connect() {
 	gsm.print(F("AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"\r"));
 	_readSerial();
-
 	if (_buffer.indexOf(F("OK")) != -1) {
 		gsm.print(F("AT+SAPBR=3,1,\"APN\",\""));
 		gsm.print(APN);
@@ -74,28 +78,38 @@ bool GSMSimGPRS::connect() {
 						_readSerial();
 						if (_buffer.indexOf(F("\"0.0.0.0\"")) == -1 || _buffer.indexOf(F("ERR")) == -1) {
 							return true;
-						}
-						else {
+						} else {
 							return false;
 						}
-					}
-					else {
+					} else {
 						return false;
 					}
-				}
-				else {
+				} else {
 					return false;
 				}
-			}
-			else {
+			} else {
 				return false;
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
+	} else {
+		return false;
 	}
-	else {
+}
+bool GSMSimGPRS::gprsSend() { //Dont work. should be 5 packets per second. As far as I understand.
+	gsm.print(F("AT+CIPSEND\r"));
+	_readSerial();
+	if (_buffer.indexOf(F(">")) != -1) {
+		gsm.print(F("99:88:77:66:55:44:33:22:00:88:77:66:55:44:33:22:11"));
+		gsm.print(F("\n\x1A\r"));
+		_readSerial();
+		if (_buffer.indexOf(F("SEND OK")) != -1) {
+			return true;
+		} else {
+			return true;
+		}
+	} else {
 		return false;
 	}
 }
@@ -105,8 +119,7 @@ bool GSMSimGPRS::isConnected() {
 	_readSerial();
 	if (_buffer.indexOf(F("ERROR")) != -1 || _buffer.indexOf(F("\"0.0.0.0\"")) != -1) {
 		return false;
-	}
-	else {
+	} else {
 		return true;
 	}
 }
@@ -116,16 +129,38 @@ String GSMSimGPRS::getIP() {
 	_readSerial();
 	if (_buffer.indexOf(F("ERROR")) != -1 || _buffer.indexOf(F("\"0.0.0.0\"")) != -1) {
 		return "ERROR:NO_IP";
-	}
-	else {
+	} else {
 		if (_buffer.indexOf("+SAPBR:") != -1) {
 			String veri = _buffer.substring(_buffer.indexOf(F(",\""))+2, _buffer.lastIndexOf(F("\"")));
 			veri.trim();
 			return veri;
-		}
-		else {
+		} else {
 			"ERROR:NO_IP_FETCH";
 		}
+	}
+}
+// Specify the address and port of the server
+bool GSMSimGPRS::gprsServerConn() {
+	gsm.print(F("AT+CIPSTART=\"TCP\",\""));
+	gsm.print(SERVER);
+	gsm.print(F("\",\""));
+	gsm.print(PORT);
+	gsm.print(F("\"\r"));
+	_readSerial();
+	if (_buffer.indexOf(F("CONNECT OK")) != -1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+// Context deactivation
+bool GSMSimGPRS::closeContext() {
+	gsm.print(F("AT+CIPSHUT\r"));
+	_readSerial();
+	if (_buffer.indexOf(F("SHUT OK")) != -1) {
+		return true;
+	} else {
+		return false;
 	}
 }
 // Close GPRS Connection
@@ -134,8 +169,7 @@ bool GSMSimGPRS::closeConn() {
 	_readSerial();
 	if (_buffer.indexOf(F("OK")) != -1) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
